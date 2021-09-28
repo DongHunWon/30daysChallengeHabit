@@ -37,9 +37,9 @@
     }
 
     /* table-item 클릭시 active 클래스 추가 */
-    /* .select-sticker.active {
+    .select-sticker.active {
         display: block;
-    } */
+    }
 
     .select-sticker h3 {
         color: #956BD9;
