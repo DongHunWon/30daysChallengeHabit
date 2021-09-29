@@ -1,14 +1,13 @@
 <script>
     import Sticker from "./Sticker.svelte";
-
-    const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+    import { data } from "../stores.js";
 </script>
 
 <section class="challenge-table">
     <h2 class="sr-only">챌린지 스티커 표</h2>
     <div class="table-item-wrap">
-        {#each days as day}
-            <div class="table-item">{day}</div>
+        {#each $data.day as day}
+            <div class="table-item">{day[1] ? day[1] : day[0]}</div>
         {/each}
     </div>
     <Sticker />

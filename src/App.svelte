@@ -4,6 +4,9 @@
     import ChallengeTable from "./components/ChallengeTable.svelte";
     import MainBtns from "./components/MainBtns.svelte";
     import SettingModal from "./components/SettingModal.svelte";
+    import { data } from "./stores.js";
+
+    $: localStorage.setItem('data', JSON.stringify($data));
 </script>
 
 <header class="header">
@@ -12,7 +15,7 @@
 <main class="main-contents">
     <header class="contents-header">
         <h2>나의 챌린지</h2>
-        <h1 class="challenge-title">제주코딩베이스캠프 강의 완강하기</h1>
+        <h1 class="challenge-title">{$data.title}</h1>
     </header>
     <article>
         <ProgressBar />
