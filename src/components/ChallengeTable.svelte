@@ -1,16 +1,64 @@
 <script>
     import Sticker from "./Sticker.svelte";
-    import { data } from "../stores.js";
+    import { data, isSticker, feelings } from "../stores.js";
+
+    let selectedItem = -1;
+    let stickerBoxPosition = {top: 0, left: 0};
+
+    // table item 클릭 이벤트
+    function itemClick(e) {
+        // div이고 class가 table-item인 요소 찾기
+        const select = e.target.closest("div.table-item");
+        // select가 null 인지 확인
+        if (select) {
+            // 전과 다른 item을 선택했을 시 스티커창 표시
+            // 똑같은 item을 선택했을 시 스티커창 제거
+            if (selectedItem !== select.dataset.id) {
+                if (!$isSticker) isSticker.handler();
+                stickerStyle(select);
+            } else {
+                isSticker.handler();
+                select.classList.remove("selected");
+            }
+            selectedItem = select.dataset.id;
+        }
+    }
+
+    // 스티커창 위치 조정
+    function stickerStyle(selectItem) {
+        // 선택한 item을 기준으로 가운데 오게 설정;
+        // 스티커창 width = 381px;
+        const tableItemWidth = selectItem.offsetWidth + parseInt(window.getComputedStyle(selectItem).getPropertyValue("margin-bottom"), 10);
+        stickerBoxPosition.top = `${tableItemWidth + selectItem.offsetTop}px`;
+        stickerBoxPosition.left = `${selectItem.offsetLeft + Math.floor(selectItem.offsetWidth / 2) - 159}px`;
+    }
+
+    // 스티커 클릭 이벤트
+    function stickerClick(e) {
+        // li 요소 찾기
+        const select = e.target.closest("li");
+        // select가 null 인지 확인
+        if (select && selectedItem !== -1) {
+            data.setSticker(selectedItem, select.dataset.id);
+            isSticker.handler();
+        }
+    }
 </script>
 
 <section class="challenge-table">
     <h2 class="sr-only">챌린지 스티커 표</h2>
-    <div class="table-item-wrap">
-        {#each $data.days as day}
-            <div class="table-item">{day[1] ? day[1] : day[0]}</div>
+    <div class="table-item-wrap" on:click={itemClick}>
+        {#each $data.days as day, i}
+            <div class="table-item {i === Number(selectedItem) ? "selected" : ""}" data-id={i} >
+                {#if day[1]}
+                    <img src={$feelings[day[1]][1]} alt={$feelings[day[1]][0]} />
+                {:else}
+                    {day[0]}
+                {/if}
+            </div>
         {/each}
     </div>
-    <Sticker />
+    <Sticker on:click={stickerClick} {...stickerBoxPosition} />
 </section>
 
 <style>
@@ -49,10 +97,10 @@
         cursor: pointer;
     }
 
-    /* .table-item.selected {
+    .table-item.selected {
         border: 2px solid #956BD9;
         color: #956BD9;
-    } */
+    }
 
     /* table-item 중 5의 배수 자식들은 margin-right=0 */
     .challenge-table .table-item:nth-child(5n) {
@@ -73,8 +121,8 @@
             font-size: 14px;
         }
 
-        /* .challenge-table .table-item:nth-child(5n) {
+        .challenge-table .table-item:nth-child(5n) {
             margin: 0 0 10px 0;
-        } */
+        }
     }
 </style>

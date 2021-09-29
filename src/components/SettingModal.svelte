@@ -1,5 +1,5 @@
 <script>
-    import { isModalOpen, data } from "../stores.js";
+    import { isModal, data } from "../stores.js";
 
     function onSubmit(e) {
         e.preventDefault();
@@ -8,9 +8,8 @@
         if (title.trim() === "") alert("챌린지 이름을 입력하세요.");
         else if (challengeDay === "") alert("챌린지 기간을 선택해주세요.");
         else {
-            const days = Array(Number(challengeDay)).fill(0).map((e, i) => [i + 1, null]);
-            data.dataSet({title, days});
-            isModalOpen.handler();
+            data.setData(title, Number(challengeDay));
+            isModal.handler();
         }
     }
     
@@ -41,7 +40,7 @@
             </article>
             <section class="modal-buttons">
                 <h2 class="sr-only">모달 버튼 리스트</h2>
-                <button type="button" class="cancel-btn" on:click={isModalOpen.handler}>취소하기</button>
+                <button type="button" class="cancel-btn" on:click={isModal.handler}>취소하기</button>
                 <button type="submit" class="save-btn fill">저장하기</button>
             </section>
         </form>

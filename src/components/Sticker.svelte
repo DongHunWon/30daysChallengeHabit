@@ -1,17 +1,22 @@
 <script>
-    const feelings = [
-        ["신남", "http://drive.google.com/uc?export=view&id=17IDBY9fCejJ5nCqQcwK34pIqFgDe_fav"],
-        ["기가막힘", "http://drive.google.com/uc?export=view&id=1VcOjsI56H5r210Q_8J0wHhQ89DOneZNy"],
-        ["굿!", "http://drive.google.com/uc?export=view&id=1685GrdPc58lnuimssBKGozohZWlhVZAX"],
-        ["(...)", "http://drive.google.com/uc?export=view&id=1Ygo1mXWWBeL6F_l9KHap9oH77Fdnxd57"]
-    ]
+    import { feelings, isSticker, data } from "../stores.js";
+    import { afterUpdate } from "svelte";
+
+    export let top;
+    export let left;
+
+    afterUpdate(() => {
+        const selectSticker = document.querySelector(".select-sticker");
+        selectSticker.style.top = top;
+        selectSticker.style.left = left;
+    });
 </script>
 
-<div class="select-sticker">
+<div class="select-sticker {$isSticker ? "active" : ""}">
     <h3>"오늘의 나는??</h3>
-    <ul class="sticker-list">
-        {#each feelings as feeling}
-            <li class="sticker-item">
+    <ul class="sticker-list" on:click>
+        {#each $feelings as feeling, i}
+            <li class="sticker-item" data-id={i}>
                 <img src={feeling[1]} alt="sticker">
                 <span>{feeling[0]}</span>
             </li>
