@@ -6,12 +6,17 @@
         const title = e.target["chellenge-name"].value;
         const challengeDay = e.target["challenge-term"].value;
         if (title.trim() === "") alert("챌린지 이름을 입력하세요.");
-        console.log(challengeDay === "")
+        else if (challengeDay === "") alert("챌린지 기간을 선택해주세요.");
+        else {
+            const days = Array(Number(challengeDay)).fill(0).map((e, i) => [i + 1, null]);
+            data.dataSet({title, days});
+            isModalOpen.handler();
+        }
     }
-
+    
 </script>
 
-<section class="setting-modal {$isModalOpen ? "active" : ""}">
+<section class="setting-modal">
     <div class="modal-wrap">
         <header>
             <h2>챌린지 설정</h2>
@@ -46,7 +51,6 @@
 <style>
     /* 챌린지 수정 - 모달창 */
     .setting-modal {
-        display: none;
         position: fixed;
         top: 0;
         left: 0;
@@ -54,11 +58,6 @@
         bottom: 0;
         color: #4F4F4F;
         background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    /* 챌린지 설정하기 버튼 클릭시 active 클래스 추가 */
-    .setting-modal.active {
-        display: block;
     }
 
     /* 챌린지 수정 모달 wrapper */
@@ -168,7 +167,6 @@
 
     @media all and (max-width: 480px) {
         .setting-modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -176,10 +174,6 @@
             bottom: 0;
             color: #4F4F4F;
             background-color: rgba(0, 0, 0, 0.2);
-        }
-
-        .setting-modal.active {
-            display: block;
         }
 
         .modal-wrap {

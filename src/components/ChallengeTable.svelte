@@ -6,7 +6,7 @@
 <section class="challenge-table">
     <h2 class="sr-only">챌린지 스티커 표</h2>
     <div class="table-item-wrap">
-        {#each $data.day as day}
+        {#each $data.days as day}
             <div class="table-item">{day[1] ? day[1] : day[0]}</div>
         {/each}
     </div>

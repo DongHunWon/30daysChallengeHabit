@@ -4,7 +4,7 @@
     import ChallengeTable from "./components/ChallengeTable.svelte";
     import MainBtns from "./components/MainBtns.svelte";
     import SettingModal from "./components/SettingModal.svelte";
-    import { data } from "./stores.js";
+    import { isModalOpen, data } from "./stores.js";
 
     $: localStorage.setItem('data', JSON.stringify($data));
 </script>
@@ -23,7 +23,10 @@
         <MainBtns />
     </article>
 </main>
-<SettingModal />
+
+{#if $isModalOpen}
+    <SettingModal />
+{/if}
 
 
 <style>

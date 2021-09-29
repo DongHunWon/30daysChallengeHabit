@@ -13,13 +13,13 @@ function createData() {
     // localStorage에 데이터 불러오기
     let data = JSON.parse(localStorage.getItem('data'));
     try {
-        if (!("title" in data && "day" in data && Array.isArray(data.day))) {
+        if (!("title" in data && "days" in data && Array.isArray(data.day))) {
             throw new Error();
         }
     } catch {
         data = {
             "title": "챌린지를 등록해주세요.",
-            "day": Array(15).fill(0).map((e, i) => [i + 1, null])
+            "days": Array(15).fill(0).map((e, i) => [i + 1, null])
         }
     }
     set(data);
