@@ -1,11 +1,22 @@
-<script></script>
+<script>
+    import { isModalOpen, data } from "../stores.js";
 
-<section class="setting-modal">
+    function onSubmit(e) {
+        e.preventDefault();
+        const title = e.target["chellenge-name"].value;
+        const challengeDay = e.target["challenge-term"].value;
+        if (title.trim() === "") alert("챌린지 이름을 입력하세요.");
+        console.log(challengeDay === "")
+    }
+
+</script>
+
+<section class="setting-modal {$isModalOpen ? "active" : ""}">
     <div class="modal-wrap">
         <header>
             <h2>챌린지 설정</h2>
         </header>
-        <form action="">
+        <form on:submit={onSubmit}>
             <article class="input">
                 <div class="input-name">
                     <h3 class="input-title">챌린지 이름</h3>
@@ -18,14 +29,14 @@
                         <label for="15">15일</label>
                         <input type="radio" name="challenge-term" id="25" value="25">
                         <label for="25">25일</label>
-                        <input type="radio" name="challenge-term" id="30">
-                        <label for="30" value="30">30일</label>
+                        <input type="radio" name="challenge-term" id="30" value="30">
+                        <label for="30">30일</label>
                     </div>
                 </div>
             </article>
             <section class="modal-buttons">
                 <h2 class="sr-only">모달 버튼 리스트</h2>
-                <button type="button" class="cancel-btn">취소하기</button>
+                <button type="button" class="cancel-btn" on:click={isModalOpen.handler}>취소하기</button>
                 <button type="submit" class="save-btn fill">저장하기</button>
             </section>
         </form>
