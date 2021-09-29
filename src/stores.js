@@ -20,15 +20,12 @@ function createData() {
     const { subscribe, set, update} = writable();
     // localStorage에 데이터 불러오기
     let data = JSON.parse(localStorage.getItem('data'));
-        if (!("title" in data && "days" in data && Array.isArray(data.day))) {
-            console.log('여기?')
+    if (!("title" in data && "days" in data && Array.isArray(data.days))) {
+        data = {
+            "title": "챌린지를 등록해주세요.",
+            "days": Array(15).fill(0).map((e, i) => [i + 1, null])
         }
-        else {
-            data = {
-                "title": "챌린지를 등록해주세요.",
-                "days": Array(15).fill(0).map((e, i) => [i + 1, null])
-            }
-        }
+    }
     set(data);
 
     return {
