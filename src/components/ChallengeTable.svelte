@@ -25,11 +25,10 @@
 
     // 스티커창 위치 조정
     function stickerPosition(selectItem) {
-        // 선택한 item을 기준으로 가운데 오게 설정;
-        // 스티커창 width = 381px;
+        const idx = selectItem.dataset.id % 5;
         const tableItemWidth = selectItem.offsetWidth + parseInt(window.getComputedStyle(selectItem).getPropertyValue("margin-bottom"), 10);
         stickerBoxPosition.top = `${tableItemWidth + selectItem.offsetTop}px`;
-        stickerBoxPosition.left = `${selectItem.offsetLeft + Math.floor(selectItem.offsetWidth / 2) - 159}px`;
+        stickerBoxPosition.left = idx < 1 ? `${selectItem.offsetLeft}px` : `${selectItem.offsetLeft - selectItem.offsetWidth * idx - selectItem.style.marginTop}px`;
     }
 
     // 스티커 클릭 이벤트
