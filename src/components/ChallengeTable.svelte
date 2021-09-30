@@ -9,13 +9,12 @@
     function itemClick(e) {
         // div이고 class가 table-item인 요소 찾기
         const select = e.target.closest("div.table-item");
-        // select가 null 인지 확인
         if (select) {
             // 전과 다른 item을 선택했을 시 스티커창 표시
             // 똑같은 item을 선택했을 시 스티커창 제거
             if (selectedItem !== select.dataset.id) {
                 if (!$isSticker) isSticker.handler();
-                stickerStyle(select);
+                stickerPosition(select);
             } else {
                 isSticker.handler();
                 select.classList.remove("selected");
@@ -25,7 +24,7 @@
     }
 
     // 스티커창 위치 조정
-    function stickerStyle(selectItem) {
+    function stickerPosition(selectItem) {
         // 선택한 item을 기준으로 가운데 오게 설정;
         // 스티커창 width = 381px;
         const tableItemWidth = selectItem.offsetWidth + parseInt(window.getComputedStyle(selectItem).getPropertyValue("margin-bottom"), 10);

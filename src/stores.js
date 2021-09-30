@@ -46,8 +46,8 @@ export const isModal = createModalOpen();
 export const isSticker = createStickerOpen();
 export const data = createData();
 export const feelings = readable([
-    ["신남", "http://drive.google.com/uc?export=view&id=17IDBY9fCejJ5nCqQcwK34pIqFgDe_fav"],
-    ["기가막힘", "http://drive.google.com/uc?export=view&id=1VcOjsI56H5r210Q_8J0wHhQ89DOneZNy"],
-    ["굿!", "http://drive.google.com/uc?export=view&id=1685GrdPc58lnuimssBKGozohZWlhVZAX"],
-    ["(...)", "http://drive.google.com/uc?export=view&id=1Ygo1mXWWBeL6F_l9KHap9oH77Fdnxd57"]
+    ["신남", "./images/sticker_1.png"],
+    ["기가막힘", "./images/sticker_2.png"],
+    ["굿!", "./images/sticker_3.png"],
+    ["(...)", "./images/sticker_4.png"]
 ]);
