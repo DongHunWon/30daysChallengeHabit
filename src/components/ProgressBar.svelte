@@ -6,7 +6,6 @@
         return acc;
     }, [0, $data.days.length]);
     $: barStyle = `--bar-width: ${stickerCnt[0] / stickerCnt[1] * 100}%`
-    $: console.log(barStyle)
 </script>
 
 <section class="progress" style={barStyle}>
