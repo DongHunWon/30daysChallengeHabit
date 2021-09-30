@@ -1,6 +1,15 @@
-<script></script>
+<script>
+    import { data } from "../stores.js";
 
-<section class="progress">
+    $: stickerCnt = $data.days.reduce((acc, cur) => {
+        if (cur[1]) acc[0]++;
+        return acc;
+    }, [0, $data.days.length]);
+    $: barStyle = `--bar-width: ${stickerCnt[0] / stickerCnt[1] * 100}%`
+    $: console.log(barStyle)
+</script>
+
+<section class="progress" style={barStyle}>
     <h2 class="sr-only">진행 상황 그래프</h2>
     <div class="progress-bar-cont">
         <div class="progress-bar"></div>
@@ -31,7 +40,7 @@
     /* 상태바 */
     /* progress-bar width는 진행상황에 맞춰서 변경 */
     .progress-bar {
-        width: 50%;
+        width: var(--bar-width, 0%);
         height: 100%;
         background: linear-gradient(270deg, #956BD9 0%, #FFE973 101.15%);
         border-radius: 20px;
