@@ -7,19 +7,19 @@
 
     // table item 클릭 이벤트
     function itemClick(e) {
-        // div이고 class가 table-item인 요소 찾기
         const select = e.target.closest("div.table-item");
         if (select) {
-            // 전과 다른 item을 선택했을 시 스티커창 표시
-            // 똑같은 item을 선택했을 시 스티커창 제거
             if (selectedItem !== select.dataset.id) {
+                // 전과 다른 item을 선택했을 시 스티커창 표시
                 if (!$isSticker) isSticker.handler();
                 stickerPosition(select);
+                selectedItem = select.dataset.id;
             } else {
+                // 똑같은 item을 선택했을 시 스티커창 제거
                 isSticker.handler();
                 select.classList.remove("selected");
+                selectedItem = -1;
             }
-            selectedItem = select.dataset.id;
         }
     }
 
@@ -33,9 +33,7 @@
 
     // 스티커 클릭 이벤트
     function stickerClick(e) {
-        // li 요소 찾기
         const select = e.target.closest("li");
-        // select가 null 인지 확인
         if (select && selectedItem !== -1) {
             data.setSticker(selectedItem, select.dataset.id);
             isSticker.handler();
