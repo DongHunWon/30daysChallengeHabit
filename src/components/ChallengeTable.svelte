@@ -37,6 +37,7 @@
         if (select && selectedItem !== -1) {
             data.setSticker(selectedItem, select.dataset.id);
             isSticker.handler();
+            selectedItem = -1;
         }
     }
 </script>
@@ -60,14 +61,11 @@
 <style>
     /* 챌린지 테이블 */
     .challenge-table {
-        position: relative;
         width: 446px;
-        background-color: #FFF;
+        background-color: #FFFFFF;
         border-radius: 20px;
         box-sizing: border-box;
         padding: 24px 24px 12px;
-        box-shadow: 0px 0px 8px rgba(149, 107, 217, 0.38);
-        margin-right: 0;
         margin-bottom: 40px;
     }
 

@@ -12,16 +12,18 @@
 <header class="header">
     <Visitors />
 </header>
-<main class="main-contents">
-    <header class="contents-header">
-        <h2>나의 챌린지</h2>
-        <h1 class="challenge-title">{$data.title}</h1>
-    </header>
-    <article>
-        <ProgressBar />
-        <ChallengeTable />
-        <MainBtns />
-    </article>
+<main class="main-wrap">
+    <div class="main-contents">
+        <header class="contents-header">
+            <h2>나의 챌린지</h2>
+            <h1 class="challenge-title">{$data.title}</h1>
+        </header>
+        <article>
+            <ProgressBar />
+            <ChallengeTable />
+            <MainBtns />
+        </article>
+    </div>
 </main>
 
 {#if $isModal}
@@ -41,13 +43,18 @@
     }
 
     /* 메인 컨텐츠 */
-    .main-contents {
+    .main-wrap {
         position: absolute;
         top: 116px;
-        left: 50%;
-        transform: translateX(-50%);
         width: 100%;
     }
+
+    /* 메인 컨텐츠 감싸는 요소 */
+    .main-contents {
+        width: 500px;
+        margin: 0 auto;
+    }
+
 
     /* 메인 컨텐츠 - 헤더 */
     .contents-header {
@@ -65,7 +72,6 @@
     .challenge-title {
         font-size: 36px;
         font-weight: 700;
-        padding: 0 20px;
     }
 
     /* 메인 컨텐츠 - article */
